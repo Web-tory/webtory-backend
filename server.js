@@ -9,10 +9,10 @@ app.use(cors());
 app.use(express.json());
 
 const dataFile = 'data.json';
-
+const budgetFile = 'budget.json';
 // 예산 가져오기
 app.get('/budget', (req, res) => {
-  fs.readFile(dataFile, 'utf8', (err, data) => {
+  fs.readFile(budgetFile, 'utf8', (err, data) => {
     if (err) {
       res.status(500).send('Error reading data');
     } else {
@@ -22,24 +22,24 @@ app.get('/budget', (req, res) => {
   });
 });
 
-// 예산 업데이트
 app.put('/budget', (req, res) => {
-  fs.readFile(dataFile, 'utf8', (err, data) => {
+  fs.readFile(budgetFile, 'utf8', (err, data) => {
     if (err) {
       res.status(500).send('Error reading data');
-    } else {
-      const jsonData = JSON.parse(data);
-      jsonData.budget = req.body.budget;  // 클라이언트로부터 받은 새 예산 값
-      fs.writeFile(dataFile, JSON.stringify(jsonData, null, 2), 'utf8', (err) => {
-        if (err) {
-          res.status(500).send('Error writing data');
-        } else {
-          res.status(200).json({ budget: jsonData.budget });
-        }
-      });
+      return;
     }
+    const jsonData = JSON.parse(data);
+    jsonData.budget = req.body.budget;  // 새 예산 값
+    fs.writeFile(budgetFile, JSON.stringify(jsonData, null, 2), 'utf8', (err) => {
+      if (err) {
+        res.status(500).send('Error writing data');
+      } else {
+        res.status(200).json({ budget: jsonData.budget });
+      }
+    });
   });
 });
+
 
 
 // Get all expenses
