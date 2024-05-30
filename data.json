@@ -1,13 +1,5 @@
 [
   {
-    "id": 1,
-    "name": "생일선물",
-    "amount": 20900,
-    "category": "생활",
-    "date": "2024-01-20",
-    "comments": []
-  },
-  {
     "id": 2,
     "name": "아웃백",
     "amount": 49968,
@@ -40,14 +32,6 @@
     "comments": []
   },
   {
-    "id": 6,
-    "name": "핑거봇",
-    "amount": 30098,
-    "category": "생활",
-    "date": "2024-01-22",
-    "comments": []
-  },
-  {
     "id": 7,
     "name": "정보처리기사 필기",
     "amount": 9700,
@@ -56,11 +40,11 @@
     "comments": []
   },
   {
-    "id": 8,
-    "name": "편의점",
-    "amount": 1100,
+    "id": 7,
+    "name": "쿼드커피",
+    "amount": 3000,
     "category": "식비",
-    "date": "2024-01-23",
+    "date": "2024-05-31",
     "comments": []
   }
 ]

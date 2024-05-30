@@ -131,6 +131,31 @@ app.put('/expenses/:expenseId/comments/:commentId', (req, res) => {
   });
 });
 
+app.delete('/expenses/:id', (req, res) => {
+  console.log('Delete request received for ID:', req.params.id);
+  fs.readFile(dataFile, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading data file:', err);
+      res.status(500).send('Error reading data');
+      return;
+    }
+    let expenses = JSON.parse(data);
+    const filteredExpenses = expenses.filter(expense => expense.id !== parseInt(req.params.id));
+
+    fs.writeFile(dataFile, JSON.stringify(filteredExpenses, null, 2), 'utf8', (err) => {
+      if (err) {
+        console.error('Error writing data file:', err);
+        res.status(500).send('Error writing data');
+        return;
+      }
+      console.log('Expense with ID', req.params.id, 'deleted successfully.');
+      res.status(204).send(); // No Content
+    });
+  });
+});
+
+
+
 // Delete a comment
 app.delete('/expenses/:expenseId/comments/:commentId', (req, res) => {
   fs.readFile(dataFile, (err, data) => {
